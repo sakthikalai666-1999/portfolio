@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalai - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="home-style.css">
+</head>
+<style>
+   .home-profile {
+    width: clamp(220px, 25vw, 300px);
+    height: clamp(220px, 25vw, 300px);
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+    position: relative;
+    border: 4px solid #007bff;
+    box-shadow: 
+        0 0 30px rgba(0,123,255,0.4),
+        0 0 60px rgba(0,123,255,0.2),
+        inset 0 0 30px rgba(0,123,255,0.1),
+        0 0 0 2px rgba(30,144,255,0.6);
+    transition: all 0.4s ease;
+    animation: profilePulse 4s ease-in-out infinite;
+}
+
+.profile-ring {
+    width: 340px;
+    height: 340px;
+    top: -20px;
+    left: -20px;
+    border-top-color: #007bff;
+}
+
+.profile-ring-2 {
+    width: 380px;
+    height: 380px;
+    top: -40px;
+    left: -40px;
+    border-bottom-color: #1e90ff;
+    animation-direction: reverse;
+    animation-duration: 15s;
+}
+
+.home-title {
+    font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+    font-weight: 900;
+    background: linear-gradient(45deg, #007bff, #1e90ff, #00bfff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.2rem;
+    margin-top: 0;
+    text-shadow: 0 0 50px rgba(0,123,255,0.3);
+    animation: titleGlow 3s ease-in-out infinite alternate;
+    transition: all 0.3s ease;
+}
+
+.home-subtitle {
+    font-size: 1.4rem;
+    color: #87ceeb;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 20px rgba(135,206,235,0.4);
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.home-description {
+    font-size: 1.1rem;
+    color: #b0c4de;
+    margin-bottom: 2.5rem;
+    font-style: italic;
+    opacity: 0.9;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.home-section .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3.5rem;
+    max-width: 1300px;
+    width: 100%;
+    text-align: left;
+    padding: 0 2.5rem;
+    box-sizing: border-box;
+}
+
+.home-section .profile-container {
+    position: relative;
+    margin-bottom: 0;
+    margin-top: 0;
+    flex: 0 0 auto;
+    width: 42%;
+}
+
+.home-section .home-content {
+    max-width: none;
+    margin: 0;
+    text-align: left;
+    transition: all 0.3s ease;
+    flex: 1;
+    padding-left: 2.5rem;
+}
+.greeting-text
+{
+    font-family: Poppins Light;
+    font-size: 40px;
+}
+.home-title
+{
+   font-family: Poppins ExtraBold;
+    font-size: 40px;
+}
+</style>
+<body>
+    <div class="grid-animation home-grid"></div>
+    <div class="particles"></div>
+    
+    <div class="floating-orbs">
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+    </div>
+    
+    <div class="wave-effect"></div>
+    
+    <div class="sparkles">
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+    </div>
+    
+    <nav class="navbar home-nav">
+        <div class="nav-container">
+            <div class="logo home-logo">Portfolio</div>
+            <ul class="nav-menu">
+                <li><a href="home.html" class="nav-link active home-nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link home-nav-link">About</a></li>
+                <li><a href="skills.html" class="nav-link home-nav-link">Skills</a></li>
+                <li><a href="portfolio.html" class="nav-link home-nav-link">Portfolio</a></li>
+                <li><a href="contact.html" class="nav-link home-nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="section home-section">
+        <div class="container">
+            <div class="profile-container">
+                <div class="profile-photo home-profile">
+                    <img src="/Profile/photo edit full size.jpg" alt="Profile Photo">
+                    <div class="profile-ring"></div>
+                    <div class="profile-ring-2"></div>
+                </div>
+            </div>
+            <div class="home-content">
+                <h1 class="home-title"><span class="greeting-text">Hello I'm</span> <span class="name-text"></span><br>Kalaiarasan</span></h1>
+                <div class="title-underline"></div>
+                <p class="home-subtitle">Graphics Designer</p>
+                <div class="home-description">
+                    <!-- <p>Crafting digital experiences with precision and elegance</p> -->
+                    <p>I’m a Computer Science and Engineering graduate with a strong passion for design and data. I create visually compelling graphics, design intuitive user experiences, and analyze data to deliver meaningful insights.</p>
+                </div>
+                <div class="home-buttons">
+                    <a href="portfolio.html" class="luxury-btn primary">View Portfolio</a>
+                    <a href="contact.html" class="luxury-btn secondary">Get In Touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+
+
+
+
+
+

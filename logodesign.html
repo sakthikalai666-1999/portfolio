@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logo Design Gallery - Kalai</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="home-style.css">
+    <link rel="stylesheet" href="portfolio-style.css">
+    <style>
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .gallery-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(0,123,255,0.5);
+        }
+        
+        .title-underline {
+            width: 390px;
+            height: 3px;
+            background: linear-gradient(90deg, #007bff, #1e90ff, #4169e1);
+            margin: 0 auto 3rem;
+            border-radius: 2px;
+            box-shadow: 0 0 20px rgba(0,123,255,0.5);
+            animation: underlineExpand 2s ease-out;
+        }
+        
+        @keyframes underlineExpand {
+            0% { width: 0; }
+            100% { width: 390px; }
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+            align-items: start;
+            max-width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.3rem;
+            }
+        }
+        
+        .gallery-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            width: 100%;
+            height: 180px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 120px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 8px;
+        }
+
+        .gallery-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .gallery-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .placeholder-image {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .gallery-info {
+            padding: 0.6rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .gallery-info h3 {
+            color: #fff;
+            margin-bottom: 0.2rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .gallery-info p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.6rem;
+            line-height: 1.2;
+            margin: 0;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 40px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+            background: linear-gradient(135deg, #0056b3, #004085);
+        }
+        
+        /* Modal styles for full-size image viewing */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(5px);
+            overflow: auto;
+            scroll-behavior: smooth;
+        }
+        
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 100vw;
+            max-height: 100vh;
+            overflow: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        .modal-content img {
+            display: block;
+            border-radius: 0;
+            box-shadow: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .close:hover {
+            color: #007bff;
+            background: rgba(0, 123, 255, 0.2);
+            transform: scale(1.1);
+        }
+        
+        /* Navigation arrows for modal */
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            font-size: 24px;
+            padding: 15px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .modal-nav:hover {
+            background: rgba(0, 123, 255, 0.7);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .modal-prev {
+            left: 20px;
+        }
+        
+        .modal-next {
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="particles"></div>
+    
+    <div class="floating-orbs">
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+    </div>
+    
+    <div class="wave-effect"></div>
+    
+    <div class="sparkles">
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+    </div>
+    
+    <nav class="navbar home-nav">
+        <div class="nav-container">
+            <div class="logo home-logo">Portfolio</div>
+            <ul class="nav-menu">
+                <li><a href="home.html" class="nav-link home-nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link home-nav-link">About</a></li>
+                <li><a href="skills.html" class="nav-link home-nav-link">Skills</a></li>
+                <li><a href="portfolio.html" class="nav-link active home-nav-link">Portfolio</a></li>
+                <li><a href="contact.html" class="nav-link home-nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="section home-section">
+        <div class="gallery-container">
+            <a href="portfolio.html" class="back-btn">← Back to Portfolio</a>
+            
+            <h2 class="gallery-title">Logo Design Gallery</h2>
+            <div class="title-underline"></div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openModal('modal1')">
+                    <div class="gallery-image">
+                        <img src="/Logos/Empire Builders_new-1.jpg" alt="Logo Design 1" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder-image&quot;>Logo Design 1</div>'">
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Empire Builders</h3>
+                        <p>Construction Releated logo Design</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" onclick="openModal('modal2')">
+                    <div class="gallery-image">
+                        <img src="/Logos/Anoos Logo-1.jpg" alt="Logo Design 2" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder-image&quot;>Logo Design 2</div>'">
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Anoos </h3>
+                        <p>Natural Sweets Releated logo Design</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" onclick="openModal('modal3')">
+                    <div class="gallery-image">
+                        <img src="/Logos/INFRA ARCHITECTS LOGO-20-1.jpg" alt="Logo Design 3" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder-image&quot;>Logo Design 3</div>'">
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Infra Architects</h3>
+                        <p>Architecture Company Releated logo Design </p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" onclick="openModal('modal4')">
+                    <div class="gallery-image">
+                        <img src="/Logos/J Studio logo_21-02-1.jpg" alt="Logo Design 4" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder-image&quot;>Logo Design 4</div>'">
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Studio</h3>
+                        <p>T-Shirt Embroiding Releated logo Design </p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" onclick="openModal('modal5')">
+                    <div class="gallery-image">
+                        <img src="/Logos/J Studio logo_final-01-1.jpg" alt="Logo Design 5" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder-image&quot;>Logo Design 5</div>'">
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Viscom Releated</h3>
+                        <p>Photo and Videography Releated logo Design</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('modal6')">
+                    <div class="gallery-image">
+                        <img src="/Logos/Kadayani-1.jpg" alt="Logo Design 6" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder-image&quot;>Logo Design 6</div>'">
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Kadayani-English Version</h3>
+                        <p>Social Media Releated logo Design</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('modal7')">
+                    <div class="gallery-image">
+                        <img src="/Logos/Kalai Arts logo.jpg" alt="Logo Design 8" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder-image&quot;>Logo Design 8</div>'">
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Kalai Arts</h3>
+                        <p>Graphics Design Releated logo Design</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('modal8')">
+                    <div class="gallery-image">
+                        <img src="/Logos/Logo Recreation (Alaiyathi Library) Final-03-1.jpg" alt="Logo Design 9" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder-image&quot;>Logo Design 9</div>'">
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Alaiyathi</h3>
+                        <p>Library logo design</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('modal9')">
+                    <div class="gallery-image">
+                        <img src="/Logos/TAMILAN LOGO BLACK BACKGROUND veration 2-1.jpg" alt="Logo Design 10" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder-image&quot;>Logo Design 10</div>'">
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Tamil Kalaikoodam</h3>
+                        <p>Group Organization</p>
+                    </div>
+                </div>
+
+                 <div class="gallery-item" onclick="openModal('modal10')">
+                    <div class="gallery-image">
+                        <img src="/Logos/Main Logo-1.jpg" alt="Logo Design 11" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder-image&quot;>Logo Design 11</div>'">
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Knnan Blue Metals</h3>
+                        <p>Construction Materials Manufacturing</p>
+                    </div>
+                </div>
+
+                <!--<div class="gallery-item" onclick="openModal('modal12')">
+                    <div class="gallery-image">
+                        <img src="./logo12.jpg" alt="Logo Design 12" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder-image&quot;>Logo Design 12</div>'">
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Creative Logo 12</h3>
+                        <p>Real estate company logo design</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('modal13')">
+                    <div class="gallery-image">
+                        <img src="./logo13.jpg" alt="Logo Design 13" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder-image&quot;>Logo Design 13</div>'">
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Creative Logo 13</h3>
+                        <p>Music production studio logo</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('modal14')">
+                    <div class="gallery-image">
+                        <img src="./logo14.jpg" alt="Logo Design 14" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder-image&quot;>Logo Design 14</div>'">
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Creative Logo 14</h3>
+                        <p>Fitness center brand identity</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('modal15')">
+                    <div class="gallery-image">
+                        <img src="./logo15.jpg" alt="Logo Design 15" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder-image&quot;>Logo Design 15</div>'">
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Creative Logo 15</h3>
+                        <p>Environmental organization logo</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('modal16')">
+                    <div class="gallery-image">
+                        <img src="./logo16.jpg" alt="Logo Design 16" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder-image&quot;>Logo Design 16</div>'">
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Creative Logo 16</h3>
+                        <p>Travel agency logo with adventure theme</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('modal17')">
+                    <div class="gallery-image">
+                        <img src="./logo17.jpg" alt="Logo Design 17" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder-image&quot;>Logo Design 17</div>'">
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Creative Logo 17</h3>
+                        <p>Photography studio logo design</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('modal18')">
+                    <div class="gallery-image">
+                        <img src="./logo18.jpg" alt="Logo Design 18" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder-image&quot;>Logo Design 18</div>'">
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Creative Logo 18</h3>
+                        <p>Consulting firm professional logo</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('modal19')">
+                    <div class="gallery-image">
+                        <img src="./logo19.jpg" alt="Logo Design 19" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder-image&quot;>Logo Design 19</div>'">
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Creative Logo 19</h3>
+                        <p>Gaming company logo with modern style</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('modal20')">
+                    <div class="gallery-image">
+                        <img src="./logo20.jpg" alt="Logo Design 20" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder-image&quot;>Logo Design 20</div>'">
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Creative Logo 20</h3>
+                        <p>Luxury brand logo with premium appeal</p>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for full-size image viewing -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <button class="modal-nav modal-prev" onclick="previousImage()">&#8249;</button>
+        <button class="modal-nav modal-next" onclick="nextImage()">&#8250;</button>
+        <div class="modal-content" id="modalImage">
+            <!-- Image will be inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        let currentImageIndex = 1;
+        const totalImages = 10;
+        
+        function openModal(modalId) {
+            const modal = document.getElementById('imageModal');
+            
+            // Extract the logo number from modalId (e.g., 'modal1' -> '1')
+            currentImageIndex = parseInt(modalId.replace('modal', ''));
+            
+            showCurrentImage();
+            modal.style.display = 'block';
+        }
+        
+        function showCurrentImage() {
+            const modalContent = document.getElementById('modalImage');
+            
+            // Map of logo image filenames and their custom sizes
+            const logoConfig = {
+                1: { src: '/Logos/Empire Builders_new-1.jpg',  height: '550px' },
+                2: { src: '/Logos/Anoos Logo-1.jpg', height: '550px' },
+                3: { src: '/Logos/INFRA ARCHITECTS LOGO-20-1.jpg', width: '900px', },
+                4: { src: '/Logos/J Studio logo_21-02-1.jpg', height: '550px' },
+                5: { src: '/Logos/J Studio logo_final-01-1.jpg', width: '850px' },
+                6: { src: '/Logos/Kadayani-1.jpg', width: '800px' },
+                7: { src: '/Logos/Kalai Arts logo.jpg', width: '750px', },
+                8: { src: '/Logos/Logo Recreation (Alaiyathi Library) Final-03-1.jpg', width: '850px'},
+                9: { src: '/Logos/TAMILAN LOGO BLACK BACKGROUND veration 2-1.jpg', height: '550px' },
+                10: { src:'/Logos/Main Logo-1.jpg', height: '550px' },
+                // 12: { src: './logo12.jpg', width: '450px', height: '450px' },
+                // 13: { src: './logo13.jpg', width: '500px', height: '300px' },
+                // 14: { src: './logo14.jpg', width: '400px', height: '400px' },
+                // 15: { src: './logo15.jpg', width: '350px', height: '350px' },
+                // 16: { src: './logo16.jpg', width: '400px', height: '400px' },
+                // 17: { src: './logo17.jpg', width: '450px', height: '450px' },
+                // 18: { src: './logo18.jpg', width: '500px', height: '300px' },
+                // 19: { src: './logo19.jpg', width: '400px', height: '400px' },
+                // 20: { src: './logo20.jpg', width: '350px', height: '350px' }
+            };
+            
+            const config = logoConfig[currentImageIndex] || { 
+                src: `./logo${currentImageIndex}.jpg`, 
+                width: '400px', 
+                height: '400px' 
+            };
+            
+            // Create the image element for the modal with user-defined size
+            modalContent.innerHTML = `
+                <img src="${config.src}"
+                     alt="Logo Design ${currentImageIndex}"
+                     style="width: ${config.width}; height: ${config.height}; object-fit: contain; border-radius: 0; box-shadow: none; display: block; margin: 0; padding: 0;"
+                     onerror="this.outerHTML='<div style=&quot;width: ${config.width}; height: ${config.height}; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; border-radius: 0; box-shadow: none; margin: 0;&quot;>Logo Design ${currentImageIndex}</div>'">
+            `;
+        }
+        
+        function nextImage() {
+            currentImageIndex = currentImageIndex < totalImages ? currentImageIndex + 1 : 1;
+            showCurrentImage();
+        }
+        
+        function previousImage() {
+            currentImageIndex = currentImageIndex > 1 ? currentImageIndex - 1 : totalImages;
+            showCurrentImage();
+        }
+        
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            const modal = document.getElementById('imageModal');
+            if (modal.style.display === 'block') {
+                switch(event.key) {
+                    case 'Escape':
+                        closeModal();
+                        break;
+                    case 'ArrowRight':
+                        nextImage();
+                        break;
+                    case 'ArrowLeft':
+                        previousImage();
+                        break;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+/* Contact page specific styles */
+.home-title {
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+}
+
+.title-underline {
+    margin-bottom: 2rem;
+}
+
+.resume-section {
+    text-align: center;
+    margin: 2rem 0 3rem 0;
+}
+
+.contact-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -40px;
+    max-width: 500px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 0.8rem;
+    box-sizing: border-box;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.6rem;
+    margin-bottom: 1.2rem;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.contact-icon {
+    font-size: 1.3rem;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,123,255,0.2);
+    border-radius: 50%;
+    border: 2px solid rgba(0,123,255,0.4);
+    flex-shrink: 0;
+}
+
+.contact-details h3 {
+    color: #007bff;
+    margin-bottom: 0.2rem;
+    font-size: 0.9rem;
+}
+
+.contact-details p {
+    color: #b0c4de;
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.luxury-input {
+    width: 100%;
+    padding: 0.7rem;
+    background: rgba(0,123,255,0.1);
+    border: 2px solid rgba(0,123,255,0.3);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.contact-info {
+    width: 100%;
+    text-align: left;
+    padding: 2rem;
+}
+
+.contact-details {
+    text-align: left;
+}
+
+@media (max-width: 768px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        max-width: 100%;
+        padding: 0 0.5rem;
+    }
+    
+    .contact-item {
+        margin-bottom: 1rem;
+    }
+    
+    .contact-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+    
+    .contact-info, .contact-form {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-container {
+        padding: 0;
+        gap: 0.8rem;
+    }
+}
+
+
+
+
+
+

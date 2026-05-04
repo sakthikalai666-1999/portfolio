@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Kalai</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="home-style.css">
+    <link rel="stylesheet" href="portfolio-style.css">
+</head>
+<style>
+    .title-underline {
+    width: 190px;
+    height: 3px;
+    background: linear-gradient(90deg, #007bff, #1e90ff, #4169e1);
+    margin: 0 auto 0.5rem;
+    border-radius: 2px;
+    box-shadow: 0 0 20px rgba(0,123,255,0.5);
+    animation: underlineExpand 2s ease-out;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.title-underline:hover {
+    width: 190px;
+    height: 4px;
+    box-shadow: 0 0 30px rgba(0,123,255,0.8);
+}
+
+@keyframes underlineExpand {
+    0% { width: 0; }
+    100% { width: 190px; }
+}
+</style>
+<body>
+    <div class="particles"></div>
+    
+    <div class="floating-orbs">
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+    </div>
+    
+    <div class="wave-effect"></div>
+    
+    <div class="sparkles">
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+    </div>
+    
+    <nav class="navbar home-nav">
+        <div class="nav-container">
+            <div class="logo home-logo">Portfolio</div>
+            <ul class="nav-menu">
+                <li><a href="home.html" class="nav-link home-nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link home-nav-link">About</a></li>
+                <li><a href="skills.html" class="nav-link home-nav-link">Skills</a></li>
+                <li><a href="portfolio.html" class="nav-link active home-nav-link">Portfolio</a></li>
+                <li><a href="contact.html" class="nav-link home-nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="section home-section">
+        <div class="container">
+            <h2 class="home-title">Portfolio</h2>
+            <div class="title-underline"></div>
+            <div class="portfolio-grid luxury-portfolio">
+                <div class="project luxury-project">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <a href="posterdesign.html" class="luxury-btn primary">View Project</a>
+                        </div>
+                    </div>
+                    <h3>PosterDesign</h3>
+                    <p>Complete branding solution for tech startup</p>
+                </div>
+                <div class="project luxury-project">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <a href="logodesign.html" class="luxury-btn primary">View Project</a>
+                        </div>
+                    </div>
+                    <h3>Logo Design</h3>
+                    <p>Creative logo designs for various brands</p>
+                </div>
+                <div class="project luxury-project">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <a href="UI&UX.html" class="luxury-btn primary">View Project</a>
+                        </div>
+                    </div>
+                    <h3>Mobile App UI/UX</h3>
+                    <p>Modern interface design for fitness app</p>
+                </div>
+                <!-- Website redesign column -->
+                <div class="project luxury-project">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <a href="/Data Analytics.html" class="luxury-btn primary">View Project</a>
+                        </div>
+                    </div>
+                    <h3>Data Analysis</h3>
+                    <p>Visulization of Data Sheets</p>
+                </div> 
+                <!-- <div class="project luxury-project">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <a href="#" class="luxury-btn primary">View Project</a>
+                        </div>
+                    </div>
+                    <h3>Website Redesign</h3>
+                    <p>E-commerce platform visual overhaul</p>
+                </div>  -->
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+
+
+
